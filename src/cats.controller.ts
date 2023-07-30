@@ -1,5 +1,6 @@
-import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param } from '@nestjs/common'
+import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param, Body } from '@nestjs/common'
 import { Observable, of } from 'rxjs';
+import { CreateCatDto } from './create-cat.dto';
 
 @Controller('cats')
 export class CatsController {
@@ -56,11 +57,28 @@ export class CatsController {
         return `This action returns a value: ${query}`
     }
 
+    @Get('asyncPromise')
+    async asyncPromisefindAll(): Promise<any[]> {
+        return [];
+    } 
+
     @Get('async')
     asyncFindAll(): Observable<any[]> {
         return of([{
             "test": "Hello"
         }]);
+    }
+
+    @Post('createCat')
+    async createCat(@Body() createCatDto: CreateCatDto) {
+        if (createCatDto !== null) {
+            console.log(`body: ${createCatDto.age}`)
+            return {
+                result: "completed"
+            }
+        }
+
+        return "This action creates a new cat";
     }
 }
 

@@ -1,7 +1,8 @@
-import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param, Body, Put, Delete } from '@nestjs/common'
+import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param, Body, Put, Delete, HttpStatus, Res } from '@nestjs/common'
 import { Observable, of } from 'rxjs';
 import { CreateCatDto } from './create-cat.dto';
 import { UpdateCatDto } from './update-cat.dto';
+import { Response } from 'express';
 
 @Controller('cats')
 export class CatsController {
@@ -91,5 +92,14 @@ export class CatsController {
     remove(@Param('id') id: string) {
         return `This action removes a #${id} cat`;
     }
-}
 
+    @Post('resCats')
+    createResCat(@Res() res: Response) {
+        res.status(HttpStatus.CREATED).send()
+    }
+
+    @Get('resCats')
+    findAllResCat(@Res() res: Response) {
+        res.status(HttpStatus.OK).json([])
+    }
+}

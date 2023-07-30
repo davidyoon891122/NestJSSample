@@ -1,6 +1,7 @@
-import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param, Body } from '@nestjs/common'
+import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param, Body, Put, Delete } from '@nestjs/common'
 import { Observable, of } from 'rxjs';
 import { CreateCatDto } from './create-cat.dto';
+import { UpdateCatDto } from './update-cat.dto';
 
 @Controller('cats')
 export class CatsController {
@@ -79,6 +80,16 @@ export class CatsController {
         }
 
         return "This action creates a new cat";
+    }
+
+    @Put(':id')
+    update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
+        return `This action updates a #${id} cat`;
+    }
+    
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return `This action removes a #${id} cat`;
     }
 }
 

@@ -99,7 +99,7 @@ export class CatsController {
     }
 
     @Get('resCats')
-    findAllResCat(@Res() res: Response) {
+    findAllResCat(@Res({ passthrough: true }) res: Response) {
         res.status(HttpStatus.OK).json([])
     }
 }

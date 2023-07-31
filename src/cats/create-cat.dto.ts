@@ -1,4 +1,4 @@
-export class CreateCatDto {
+export interface CreateCatDto {
     name: string;
     age: number;
     breed: string

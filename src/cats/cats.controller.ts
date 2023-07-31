@@ -48,9 +48,16 @@ export class CatsController {
         throw new ForbiddenException();
     }
 
-    @Get(':id')
-    async findOne(@Param('id', ParseIntPipe) id: number) {
-        return this.catsService.findOne(id)
-    }
+    // @Get(':id')
+    // async findOne(@Param('id', ParseIntPipe) id: number) {
+    //     return this.catsService.findOne(id)
+    // }
 
+    @Get(':id')
+    async findOne(
+      @Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }))
+      id: number,
+    ) {
+      return this.catsService.findOne(id);
+    }
 }

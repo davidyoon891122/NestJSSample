@@ -19,4 +19,8 @@ export class CatsService {
     async findAllExcept(): Promise<string> {
         throw new HttpException("message", HttpStatus.FORBIDDEN);
     }
+
+    findOne(id: number) {
+        return this.cats[id];
+    }
 }

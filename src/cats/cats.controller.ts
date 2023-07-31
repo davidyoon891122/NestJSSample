@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param, Body, Put, Delete, HttpStatus, Res, HttpException, UseFilters } from '@nestjs/common'
+import { Controller, Get, Req, Post, HttpCode, Header, Redirect, Query, Param, Body, Put, Delete, HttpStatus, Res, HttpException, UseFilters, ParseIntPipe } from '@nestjs/common'
 import { Observable, of } from 'rxjs';
 import { CreateCatDto } from './create-cat.dto';
 import { UpdateCatDto } from './update-cat.dto';
@@ -46,6 +46,11 @@ export class CatsController {
     @UseFilters(new HttpExceptionFilter())
     async createCat(@Body() createCatDto: CreateCatDto) {
         throw new ForbiddenException();
+    }
+
+    @Get(':id')
+    async findOne(@Param('id', ParseIntPipe) id: number) {
+        return this.catsService.findOne(id)
     }
 
 }

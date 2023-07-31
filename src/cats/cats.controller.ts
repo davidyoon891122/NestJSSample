@@ -5,6 +5,7 @@ import { UpdateCatDto } from './update-cat.dto';
 import { Response } from 'express';
 import { CatsService } from './cats.service';
 import { Cat } from './cats.interface';
+import { ForbiddenException } from 'src/forbidden.exception';
 
 @Controller('cats')
 export class CatsController {
@@ -33,5 +34,10 @@ export class CatsController {
                 cause: error
             });
         }
+    }
+
+    @Get('exceptCustom')
+    async findAllExceptCustom() {
+        throw new ForbiddenException
     }
 }

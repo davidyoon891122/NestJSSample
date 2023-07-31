@@ -16,6 +16,9 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
     .apply(LoggerMiddleware)
+    .exclude(
+      { path: 'cats', method: RequestMethod.GET }
+    )
     .forRoutes(CatsController);
   }
 }

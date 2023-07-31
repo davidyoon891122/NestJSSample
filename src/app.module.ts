@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/c
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
-import { LoggerMiddleware } from './logger.middleware';
+import { LoggerMiddleware, logger } from './logger.middleware';
 import { CatsController } from './cats/cats.controller';
 
 // @Module decorator provides metadata that Nest makes use of to organize the application structure
@@ -15,7 +15,7 @@ import { CatsController } from './cats/cats.controller';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-    .apply(LoggerMiddleware)
+    .apply(logger)
     .exclude(
       { path: 'cats', method: RequestMethod.GET }
     )
